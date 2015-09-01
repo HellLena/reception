@@ -6,13 +6,15 @@
     %th
     %th
     %th
+    %th
 
   - @applications.each do |application|
     %tr
+      %td= application.id
       %td= link_to 'Show', application
       %td= link_to 'Edit', edit_application_path(application)
       %td= link_to 'Destroy', application, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Application', new_application_path
+= button_to 'Создать обращение', new_application_path, :class => 'btn btn-primary btn-sm', :method => :get

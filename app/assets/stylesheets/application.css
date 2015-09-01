@@ -21,3 +21,6 @@
     border-radius: 0px;
 }
 
+.actions div {
+    display: inline;
+}

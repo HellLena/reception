@@ -15,6 +15,7 @@ class ApplicationsController < ApplicationController
   # GET /applications/new
   def new
     @application = Application.new
+    @appeal_types = AppealType.all
   end
 
   # GET /applications/1/edit
@@ -28,8 +29,8 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       if @application.save
-        format.html { redirect_to @application, notice: 'Application was successfully created.' }
-        format.json { render :show, status: :created, location: @application }
+        format.html { redirect_to applications_path, notice: 'Обращение было успешно создано.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @application.errors, status: :unprocessable_entity }
@@ -42,7 +43,7 @@ class ApplicationsController < ApplicationController
   def update
     respond_to do |format|
       if @application.update(application_params)
-        format.html { redirect_to @application, notice: 'Application was successfully updated.' }
+        format.html { redirect_to @application, notice: 'Обращение было успешно обновлено.' }
         format.json { render :show, status: :ok, location: @application }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class ApplicationsController < ApplicationController
   def destroy
     @application.destroy
     respond_to do |format|
-      format.html { redirect_to applications_url, notice: 'Application was successfully destroyed.' }
+      format.html { redirect_to applications_url, notice: 'Обращение было успешно удалено.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +70,6 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params[:application]
+      params.require(:application).permit(:applicant, :appeal_type, :subject, :contacts)
     end
 end

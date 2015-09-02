@@ -1,3 +1,27 @@
 // Place all the styles related to the Applications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.editable-container.editable-inline,
+.editable-container.editable-inline .control-group.form-group,
+.editable-container.editable-inline .control-group.form-group .editable-input,
+.editable-container.editable-inline .control-group.form-group .editable-input textarea,
+.editable-container.editable-inline .control-group.form-group .editable-input select,
+.editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit])
+{
+  width: 100%!important;
+  display: block;
+}
+
+.editable-buttons {
+  margin: 5px 5px -5px 0px;
+}
+
+.editable-click, span.editable-click {
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.edit_param:hover {
+  border-bottom: 1px dotted blue;
+}

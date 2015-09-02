@@ -6,14 +6,16 @@ class ApplicationsController < ApplicationController
   def index
     @applications = {:new => [], :current => [], :finished => []}
     Application.all.each{|application|
-      if application.decision && application.status
+      if application.status
         @applications[:finished].push(application)
-      elsif application.decision && !application.status
+      elsif application.decision
         @applications[:current].push(application)
       else
         @applications[:new].push(application)
       end
     }
+    @appeal_types = AppealType.all.map{|t| {'value' => t.id.to_s, 'text' => t.name} }.to_json
+    @decisions = Decision.all.map{|t| {'value' => t.id.to_s, 'text' => t.name} }.to_json
   end
 
   # GET /applications/1
@@ -51,11 +53,11 @@ class ApplicationsController < ApplicationController
   # PATCH/PUT /applications/1.json
   def update
     respond_to do |format|
-      if @application.update(application_params)
-        format.html { redirect_to @application, notice: 'Обращение было успешно обновлено.' }
+      if @application.update(params[:name] => params[:value])
+        format.js
         format.json { render :show, status: :ok, location: @application }
       else
-        format.html { render :edit }
+        format.js { render status: :unprocessable_entity }
         format.json { render json: @application.errors, status: :unprocessable_entity }
       end
     end

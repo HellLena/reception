@@ -48,6 +48,8 @@ gem 'twitter-bootstrap-rails', :git => 'https://github.com/seyhunak/twitter-boot
 # https://github.com/bootstrap-ruby/rails-bootstrap-forms
 gem 'bootstrap_form'
 gem 'bootstrap-wysihtml5-rails', branch: 'b3', git: 'https://github.com/Nerian/bootstrap-wysihtml5-rails.git'
+# https://github.com/bootstrap-ruby/bootstrap-editable-rails
+gem 'bootstrap-editable-rails'
 
 group :development do
   gem 'pry-rails'

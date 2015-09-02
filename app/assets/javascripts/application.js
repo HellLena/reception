@@ -15,5 +15,6 @@
 
 //= require bootstrap
 //= require bootstrap.min
+//= require bootstrap-editable
 
 //= require_tree .

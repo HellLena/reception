@@ -1,0 +1,48 @@
+- if applications.length > 0
+  %table.table.table-condensed.col-xs-12{:style => "border-collapse:collapse;"}
+    %thead
+      %tr
+        %th &nbsp;
+        %th П/н
+        %th.col-xs-2 Время создания
+        %th.col-xs-8 Краткое описание
+        %th
+    %tbody
+      - applications.each_with_index do |application, index|
+        %tr.accordion-toggle{"data-target" => "#" + application.id, "data-toggle" => "collapse"}
+          %td
+            %button.btn.btn-default.btn-xs
+              %span.glyphicon.glyphicon-eye-open
+          %td= index+1
+          %td= application.created_at
+          %td
+            %b= application.applicant + ": "
+            = application.subject[0..300] + "..."
+          %td= button_to 'x', application, :method => :delete, :data => { :confirm => 'Вы уверены, что хотите удалить запись?' }, :style => 'border: none; background: transparent;'
+        %tr
+          %td.hiddenRow{:colspan => "12"}
+            .accordian-body.collapse{:id => application.id}
+              %b ФИО:
+              = application.applicant
+              %br
+              %b Вид обращения:
+              = application.appeal_type ? application.appeal_type.name : ""
+              %br
+              %b Суть обращения:
+              = application.subject
+              %br
+              %b Контакты для обратной связи:
+              = application.contacts
+              %br
+              %b Решение:
+              = application.decision
+              %br
+              %b Комментарий:
+              = application.comments
+              %br
+              %b Выполнено:
+              = application.status
+              %br
+
+
+

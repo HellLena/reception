@@ -12,7 +12,7 @@
   .form-group
     %label
       Вид обращения
-    = select_tag :appeal_type, options_from_collection_for_select(@appeal_types, "id", "name"), :include_blank => true
+    = select_tag "application[appeal_type]", options_from_collection_for_select(@appeal_types, "id", "name"), :include_blank => true
 
   .form-group
     = f.text_area :subject, :label => "Суть обращения"

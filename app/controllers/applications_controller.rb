@@ -4,7 +4,16 @@ class ApplicationsController < ApplicationController
   # GET /applications
   # GET /applications.json
   def index
-    @applications = Application.all
+    @applications = {:new => [], :current => [], :finished => []}
+    Application.all.each{|application|
+      if application.decision && application.status
+        @applications[:finished].push(application)
+      elsif application.decision && !application.status
+        @applications[:current].push(application)
+      else
+        @applications[:new].push(application)
+      end
+    }
   end
 
   # GET /applications/1

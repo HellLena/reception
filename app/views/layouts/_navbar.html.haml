@@ -1,24 +1,23 @@
 %nav.navbar.navbar-default
-  .container
-    / Brand and toggle get grouped for better mobile display
-    .navbar-header
-      %button.navbar-toggle{"data-target" => "#navbarCollapse", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      .navbar-brand{:style => 'color: white;'}
-        = yield :header
-    / Collection of nav links and other content for toggling
-    #navbar-main.navbar-collapse.collapse
-      %ul.nav.navbar-nav
-        -#%li.active
-        -#  %a{:href => "#"} Home
-        -#%li
-        -#  %a{:href => "#"} Profile
-        -#%li
-        -#  %a{:href => "#"} Messages
-      %ul.nav.navbar-nav.navbar-right
-        -#%li
-        -#  %a{:href => "#"} Login
+  / Brand and toggle get grouped for better mobile display
+  .navbar-header
+    %button.navbar-toggle{"data-target" => "#navbarCollapse", "data-toggle" => "collapse", :type => "button"}
+      %span.sr-only Toggle navigation
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    .navbar-brand{:style => 'color: white;'}
+      = yield :header
+  / Collection of nav links and other content for toggling
+  #navbar-main.navbar-collapse.collapse
+    %ul.nav.navbar-nav
+      -#%li.active
+      -#  %a{:href => "#"} Home
+      -#%li
+      -#  %a{:href => "#"} Profile
+      -#%li
+      -#  %a{:href => "#"} Messages
+    %ul.nav.navbar-nav.navbar-right
+      -#%li
+      -#  %a{:href => "#"} Login
 

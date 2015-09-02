@@ -49,7 +49,7 @@
                 = application.comments
               %br
               %b Выполнено:
-              %span.edit_status{ 'data-name' => 'status', 'data-url' => "#{application_path(application)}", 'data-pk' => "#{application.id}", 'data-resource' => 'application', 'data-value' => application.status.nil? || !application.status ? 0 : 1 }
+              %span.edit_status{ 'data-name' => 'status', 'data-url' => "#{application_path(application)}", 'data-pk' => "#{application.id}", 'data-resource' => 'application', 'data-value' => application.status ? 1 : 0 }
               %br
 
 :javascript
@@ -64,7 +64,7 @@
     type: 'checklist',
     source: {'1': 'выполнено' },
     display: function(value, sourceData) {
-      if($.isEmptyObject(value)) {
+      if(value == 0 || (value instanceof Object && $.isEmptyObject(value))) {
         $(this).html('<span class="glyphicon glyphicon-unchecked""></span>');
       } else {
         $(this).html('<span class="glyphicon glyphicon-check"></span>');

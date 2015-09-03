@@ -7,19 +7,19 @@
           %li= msg
 
   .form-group
-    = f.text_field :applicant, :label => "ФИО"
+    = f.text_field :applicant, :label => "ФИО", :required => true, :class => 'required'
 
   .form-group
     %label
       Вид обращения
-    = select_tag "application[appeal_type]", options_from_collection_for_select(@appeal_types, "id", "name"), :include_blank => true
+    = select_tag "application[appeal_type]", options_from_collection_for_select(@appeal_types, "id", "name"), :include_blank => true, :required => true, :class => 'required'
 
   .form-group
-    = f.text_area :subject, :label => "Суть обращения"
+    = f.text_area :subject, :label => "Суть обращения", :required => true, :class => 'required'
 
   .form-group
-    = f.text_area :contacts, :label => "Контакты для обратной связи"
+    = f.text_area :contacts, :label => "Контакты для обратной связи", :required => true, :class => 'required'
 
   .actions
     = f.submit 'Сохранить', :class => 'btn btn-primary btn-sm'
-    = button_to 'Отмена', applications_path, :class => 'btn btn-default btn-sm btn-inline', :method => :get
+    = link_to 'Отмена', applications_path, :class => 'btn btn-default btn-sm', :method => :get

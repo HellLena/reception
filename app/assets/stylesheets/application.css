@@ -22,8 +22,13 @@
     border-radius: 0px;
 }
 
-.actions div {
-    display: inline;
+a.btn {
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+a.btn:visited {
+    color: #ffffff;
 }
 
 /* custom inclusion of left tabs */

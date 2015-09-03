@@ -22,5 +22,5 @@
           %hr
             %label Существующие виды обращений
             %ul#appeals_exist
-              - @appeal_types.each do |appeal_type|
+              - appeal_types.each do |appeal_type|
                 = render :partial => 'applications/appeal_type_edit', :locals => { :appeal_type => appeal_type }

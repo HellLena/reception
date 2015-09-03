@@ -13,7 +13,7 @@
     %label
       Вид обращения
     = select_tag "application[appeal_type]", options_from_collection_for_select(@appeal_types, "id", "name"), :include_blank => true, :required => true, :class => 'required'
-    %button.btn.btn-primary.btn-xs{'data-toggle' => 'modal', 'data-target' => '#appeal_type', :title => 'Создать новый вид обращений', :type => 'button'}
+    %button.btn.btn-primary.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#appeal_type', :title => 'Создать новый вид обращений', :type => 'button'}
       %span.glyphicon.glyphicon-plus
 
   .form-group
@@ -26,4 +26,4 @@
     = f.submit 'Сохранить', :class => 'btn btn-primary btn-sm'
     = link_to 'Отмена', applications_path, :class => 'btn btn-default btn-sm', :method => :get
 
-= render partial: 'appeal_type_modal', :locals => {:appeal_type => AppealType.new}
+= render partial: 'appeal_type_modal', :locals => {:appeal_type => AppealType.new, :appeal_types => @appeal_types}

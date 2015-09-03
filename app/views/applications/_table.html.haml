@@ -1,5 +1,5 @@
 - if applications.length > 0
-  %table.table.table-condensed.col-xs-12.edit_applications{:style => "border-collapse:collapse;"}
+  %table.table.table-condensed.col-xs-12.edit_applications
     %thead
       %tr
         %th &nbsp;
@@ -21,6 +21,7 @@
           %td= button_to 'x', application, :method => :delete, :data => { :confirm => 'Вы уверены, что хотите удалить запись?' }, :style => 'border: none; background: transparent;'
         %tr
           %td.hiddenRow{:colspan => "12"}
+            %hr
             .accordion-body.collapse{:id => application.id}
               %b ФИО:
               %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'applicant', 'data-resource' => 'application', 'data-type' => 'text', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите ФИО...' }
@@ -43,7 +44,10 @@
               %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'contacts', 'data-resource' => 'application', 'data-type' => 'textarea', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите контакты для обратной связи...' }
                 = application.contacts
               %br
-              %b Решение:
+              %b Решение
+              %button.btn.btn-default.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#decision', :title => 'Создать типовое решение', :type => 'button'}
+                %span.glyphicon.glyphicon-plus
+              = ': '
               %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'decision', 'data-resource' => 'application', 'data-source' => @decisions, 'data-type' => 'select', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'примите решение...', 'data-value' => application.decision ? application.decision.id.to_s : "" }
                 = application.decision ? application.decision.name : ""
               %br
@@ -53,9 +57,10 @@
               %br
               %b Выполнено:
               %span.edit_status{ 'data-name' => 'status', 'data-url' => "#{application_path(application)}", 'data-pk' => "#{application.id}", 'data-resource' => 'application', 'data-value' => application.status ? 1 : 0 }
-              %br
+            %hr
 
 = render partial: 'appeal_type_modal', :locals => {:appeal_type => AppealType.new, :appeal_types => AppealType.all}
+= render partial: 'decision_modal', :locals => {:decision => Decision.new, :decisions => Decision.all}
 
 :javascript
 

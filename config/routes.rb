@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   post 'appeal_types/create' => 'appeal_types#create'
   put 'appeal_types/update/:id' => 'appeal_types#update'
 
+  post 'decisions/create' => 'decisions#create'
+  put 'decisions/update/:id' => 'decisions#update'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

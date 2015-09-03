@@ -1,0 +1,26 @@
+#decision.modal.fade{:role => "dialog", :tabindex => "-1", "aria-hidden" => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"} &times;
+        %h4.modal-title Создание типового решения
+      .modal-body
+        = bootstrap_form_for :decision, :remote => true, :url => '/decisions/create' do |f|
+          - if decision.errors.any?
+            #error_explanation
+              %h2= "#{pluralize(decision.errors.count, "error")} prohibited this application from being saved:"
+              %ul
+                - decision.errors.full_messages.each do |msg|
+                  %li= msg
+
+          .form-group
+            = f.text_field :name, :label => "Название", :required => true, :class => 'required'
+
+          .actions
+            = f.submit 'Сохранить', :class => 'btn btn-primary btn-sm'
+
+          %hr
+            %label Существующие типовые решения
+            %ul#decisions_exist
+              - decisions.each do |decision|
+                = render :partial => 'applications/decision_edit', :locals => { :decision => decision }

@@ -13,8 +13,35 @@
   display: block;
 }
 
-.edit_applications .editable-buttons {
-  margin: 5px 5px -5px 0px;
+.edit_applications {
+
+  border-collapse: collapse;
+
+  .editable-buttons {
+    margin: 5px 5px -5px 0px;
+  }
+
+  .glyphicon_btn {
+    font-size: 0.7em;
+  }
+
+  tbody {
+    border-top: 2px solid grey;
+  }
+
+  tbody:before {
+    line-height:2.0em;
+    content:".";
+    color:white;
+    display:block;
+  }
+
+  .accordion-body {
+    background-color: rgba(232,237,238,0.5);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
 }
 
 .editable-click, span.editable-click {
@@ -32,10 +59,6 @@ label, select, #appeals_exist li {
 
 form .glyphicon_btn, .glyphicon_btn > .glyphicon {
   font-size: 0.8em;
-}
-
-table .glyphicon_btn {
-  font-size: 0.7em;
 }
 
 .glyphicon_btn {

@@ -1,0 +1,26 @@
+#appeal_type.modal.fade{:role => "dialog", :tabindex => "-1", "aria-hidden" => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"} &times;
+        %h4.modal-title Создание нового вида обращений
+      .modal-body
+        = bootstrap_form_for :appeal_type, :remote => true, :url => '/appeal_types/create' do |f|
+          - if appeal_type.errors.any?
+            #error_explanation
+              %h2= "#{pluralize(appeal_type.errors.count, "error")} prohibited this application from being saved:"
+              %ul
+                - appeal_type.errors.full_messages.each do |msg|
+                  %li= msg
+
+          .form-group
+            = f.text_field :name, :label => "Название", :required => true, :class => 'required'
+
+          .actions
+            = f.submit 'Сохранить', :class => 'btn btn-primary btn-sm'
+
+          %hr
+            %label Существующие виды обращений
+            %ul#appeals_exist
+              - @appeal_types.each do |appeal_type|
+                = render :partial => 'applications/appeal_type_edit', :locals => { :appeal_type => appeal_type }

@@ -13,7 +13,7 @@
   display: block;
 }
 
-.editable-buttons {
+.edit_applications .editable-buttons {
   margin: 5px 5px -5px 0px;
 }
 
@@ -24,4 +24,8 @@
 
 .edit_param:hover {
   border-bottom: 1px dotted blue;
+}
+
+label, select, #appeals_exist li {
+  font-size: 1.2em;
 }

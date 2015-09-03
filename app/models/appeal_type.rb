@@ -5,6 +5,6 @@ class AppealType
 
   has_many :applications, :class_name => 'Application', autosave: true, :dependent => :destroy
 
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :message => 'Вид обращения с таким именем уже существует'
 
 end

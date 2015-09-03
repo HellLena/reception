@@ -11,4 +11,9 @@ $(document).ready(function(){
             textfield.setCustomValidity('Это поле должно быть заполнено');
         }
     });
+
+    $("button[data-target='#appeal_type']").click(function(){
+        $('#appeal_type').modal('toggle');
+        return false;
+    });
 })

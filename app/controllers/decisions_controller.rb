@@ -8,7 +8,7 @@ class DecisionsController < ApplicationController
 
     respond_to do |format|
       if @decision.save
-        @decisions = Decision.all.map{|t| {'value' => t.id.to_s, 'text' => t.name} }
+        @decisions = Decision.all.map{|t| {'value' => t.id.to_s, 'text' => t.name} }.to_json
         format.js
       else
         format.json { render json: @decision.errors, status: :unprocessable_entity }

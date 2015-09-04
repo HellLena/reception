@@ -8,6 +8,7 @@ class AppealTypesController < ApplicationController
 
     respond_to do |format|
       if @appeal_type.save
+        @appeal_types = AppealType.all.map{|t| {'value' => t.id.to_s, 'text' => t.name} }.to_json
         format.js
       else
         format.json { render json: @appeal_type.errors, status: :unprocessable_entity }

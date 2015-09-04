@@ -29,6 +29,10 @@
     border-top: 2px solid grey;
   }
 
+  .accordion-toggle {
+    cursor: pointer;
+  }
+
   tbody:before {
     line-height:2.0em;
     content:".";
@@ -44,13 +48,22 @@
 
 }
 
-.editable-click, span.editable-click {
-  text-decoration: none;
-  border-bottom: none;
+//.editable-click, span.editable-click {
+//  text-decoration: none;
+//  border-bottom: none;
+//}
+
+.edit_param:hover, .edit_appeal_type:hover, .edit_status:hover {
+  //border-bottom: 1px dotted blue;
+  cursor: pointer;
 }
 
-.edit_param:hover {
-  border-bottom: 1px dotted blue;
+.editable-popup .editable-buttons {
+  margin: 0 7px 0 7px;
+}
+
+.editable-pre-wrapped {
+  white-space: normal;
 }
 
 label, select, #appeals_exist li {

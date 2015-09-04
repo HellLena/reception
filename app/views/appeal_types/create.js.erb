@@ -1,2 +1,4 @@
 $('select[name="application[appeal_type]"]').append('<option value="' + '<%= @appeal_type.id %>' + '">' + '<%= @appeal_type.name %>' + '</option>');
 $('#appeals_exist').append('<%= escape_javascript( render :partial => 'applications/appeal_type_edit', :locals => { :appeal_type => @appeal_type } ) %>');
+$('span[data-name="appeal_type"]').editable('option','source',jQuery.parseJSON('<%= raw @appeal_types %>'));
+

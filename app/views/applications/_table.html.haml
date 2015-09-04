@@ -97,6 +97,7 @@
     $('.edit_status').editable({
     type: 'checklist',
     source: {'1': 'выполнено' },
+    mode: 'popup',
     display: function(value, sourceData) {
       if(value == 0 || (value instanceof Object && $.isEmptyObject(value))) {
         $(this).html('<span class="glyphicon glyphicon-unchecked""></span>');

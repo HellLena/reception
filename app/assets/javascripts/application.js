@@ -18,3 +18,7 @@
 //= require bootstrap-editable
 
 //= require_tree .
+
+$(document).on('ready page:change', function() {
+    $(".bootstrap_flash").delay(5000).fadeOut(200);
+})

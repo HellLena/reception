@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :applications
 
   post 'appeal_types/create' => 'appeal_types#create'

@@ -5,7 +5,9 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :users_roles
+  has_and_belongs_to_many :roles
+
+  validates_uniqueness_of :email
 
   ## Database authenticatable
   field :email,              type: String, default: ""
@@ -35,4 +37,8 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+
+  def has_role? name
+    roles.pluck(:name).member?(name.to_s)
+  end
 end

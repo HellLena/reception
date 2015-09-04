@@ -19,7 +19,13 @@
  */
 
 .navbar {
-    border-radius: 0px;
+    border-radius: 0;
+
+}
+
+.navbar li span {
+    color: #ffffff;
+    display: inline-block;
 }
 
 a.btn {

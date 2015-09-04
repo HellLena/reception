@@ -24,39 +24,63 @@
             %hr
             .accordion-body.collapse{:id => application.id}
               %b ФИО:
-              %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'applicant', 'data-resource' => 'application', 'data-type' => 'text', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите ФИО...' }
+              - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'applicant', 'data-resource' => 'application', 'data-type' => 'text', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите ФИО...' }
+                  = application.applicant
+              - else
                 = application.applicant
               %br
               %b Вид обращения
-              %button.btn.btn-default.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#appeal_type', :title => 'Создать новый вид обращений', :type => 'button'}
-                %span.glyphicon.glyphicon-plus
-              = ': '
-              %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'appeal_type', 'data-resource' => 'application', 'data-source' => @appeal_types, 'data-type' => 'select', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите вид обращения...', 'data-value' => application.appeal_type ? application.appeal_type.id.to_s : "" }
-                = application.appeal_type ? application.appeal_type.name : ""
+              - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+                %button.btn.btn-default.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#appeal_type', :title => 'Создать новый вид обращений', :type => 'button'}
+                  %span.glyphicon.glyphicon-plus
+                = ': '
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'appeal_type', 'data-resource' => 'application', 'data-source' => @appeal_types, 'data-type' => 'select', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите вид обращения...', 'data-value' => application.appeal_type ? application.appeal_type.id.to_s : "" }
+                  = application.appeal_type ? application.appeal_type.name : ""
+              - else
+                = ': ' + (application.appeal_type ? application.appeal_type.name : "")
               %br
               %b Суть обращения:
               %br
-              %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'subject', 'data-resource' => 'application', 'data-type' => 'textarea', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите суть обращения...' }
+              - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'subject', 'data-resource' => 'application', 'data-type' => 'textarea', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите суть обращения...' }
+                  = application.subject
+              - else
                 = application.subject
               %br
               %b Контакты для обратной связи:
               %br
-              %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'contacts', 'data-resource' => 'application', 'data-type' => 'textarea', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите контакты для обратной связи...' }
+              - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'contacts', 'data-resource' => 'application', 'data-type' => 'textarea', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите контакты для обратной связи...' }
+                  = application.contacts
+              - else
                 = application.contacts
               %br
               %b Решение
-              %button.btn.btn-default.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#decision', :title => 'Создать типовое решение', :type => 'button'}
-                %span.glyphicon.glyphicon-plus
-              = ': '
-              %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'decision', 'data-resource' => 'application', 'data-source' => @decisions, 'data-type' => 'select', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'примите решение...', 'data-value' => application.decision ? application.decision.id.to_s : "" }
-                = application.decision ? application.decision.name : ""
+              - if current_user.has_role?(:minister) || current_user.has_role?(:admin)
+                %button.btn.btn-default.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#decision', :title => 'Создать типовое решение', :type => 'button'}
+                  %span.glyphicon.glyphicon-plus
+                = ': '
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'decision', 'data-resource' => 'application', 'data-source' => @decisions, 'data-type' => 'select', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'примите решение...', 'data-value' => application.decision ? application.decision.id.to_s : "" }
+                  = application.decision ? application.decision.name : ""
+              - else
+                = ': ' + (application.decision ? application.decision.name : "")
               %br
               %b Комментарий:
-              %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'comments', 'data-resource' => 'application', 'data-type' => 'textarea', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите комментарий...' }
+              - if current_user.has_role?(:minister) || current_user.has_role?(:admin)
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'comments', 'data-resource' => 'application', 'data-type' => 'textarea', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите комментарий...' }
+                  = application.comments
+              - else
                 = application.comments
               %br
               %b Выполнено:
-              %span.edit_status{ 'data-name' => 'status', 'data-url' => "#{application_path(application)}", 'data-pk' => "#{application.id}", 'data-resource' => 'application', 'data-value' => application.status ? 1 : 0 }
+              - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+                %span.edit_status{ 'data-name' => 'status', 'data-url' => "#{application_path(application)}", 'data-pk' => "#{application.id}", 'data-resource' => 'application', 'data-value' => application.status ? 1 : 0 }
+              - else
+                - if application.status
+                  %span.glyphicon.glyphicon-check
+                - else
+                  %span.glyphicon.glyphicon-unchecked
             %hr
 
 = render partial: 'appeal_type_modal', :locals => {:appeal_type => AppealType.new, :appeal_types => AppealType.all}

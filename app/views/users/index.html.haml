@@ -14,7 +14,7 @@
         %th Роль
         %th Действия
     %tbody
-      - @users.each_with_index do |user, index|
+      - @users.reject{|user| user.has_role?(:admin) }.each_with_index do |user, index|
         = render partial: 'user_tr', :locals => {:user => user, :index => index}
 
 #new_user.modal.fade{:role => "dialog", :tabindex => "-1", "aria-hidden" => "true"}

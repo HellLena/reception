@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  # load_and_authorize_resource
 
   # GET /users
   # GET /users.json
@@ -23,10 +24,11 @@ class UsersController < ApplicationController
     else
       @user.password = user_params[:password]
       @user.email = user_params[:email]
+      @user.roles = []
       @user.roles << Role.find(user_params[:roles])
 
       @roles = Role.all.map{|role| {'value' => role.id.to_s, 'text' => role.name}}.to_json
-      
+
       respond_to do |format|
         if @user.save
           format.js
@@ -52,6 +54,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     if params[:name] == 'roles'
+      @user.roles = []
       @user.roles << Role.find(params[:value])
     else
       @user.update(params[:name] => params[:value])

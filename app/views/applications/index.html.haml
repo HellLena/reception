@@ -1,8 +1,9 @@
 = content_for :header do
   Обращения граждан
 
-.col-xs-12
-  = button_to 'Создать обращение', new_application_path, :class => 'btn btn-primary btn-sm', :method => :get
+- if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+  .col-xs-12
+    = button_to 'Создать обращение', new_application_path, :class => 'btn btn-primary btn-sm', :method => :get
 
 .col-xs-2
   %ul.nav.nav-tabs.tabs-left

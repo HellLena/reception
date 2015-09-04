@@ -7,20 +7,20 @@
           %li= msg
 
   .form-group
-    = f.text_field :applicant, :label => "ФИО", :required => true, :class => 'required'
+    = f.text_field :applicant, :label => "ФИО", :required => true
 
   .form-group
     %label
       Вид обращения
-    = select_tag "application[appeal_type]", options_from_collection_for_select(@appeal_types, "id", "name"), :include_blank => true, :required => true, :class => 'required'
+    = select_tag "application[appeal_type]", options_from_collection_for_select(@appeal_types, "id", "name"), :include_blank => true, :required => true
     %button.btn.btn-primary.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#appeal_type', :title => 'Создать новый вид обращений', :type => 'button'}
       %span.glyphicon.glyphicon-plus
 
   .form-group
-    = f.text_area :subject, :label => "Суть обращения", :required => true, :class => 'required'
+    = f.text_area :subject, :label => "Суть обращения", :required => true
 
   .form-group
-    = f.text_area :contacts, :label => "Контакты для обратной связи", :required => true, :class => 'required'
+    = f.text_area :contacts, :label => "Контакты для обратной связи", :required => true
 
   .actions
     = f.submit 'Сохранить', :class => 'btn btn-primary btn-sm'

@@ -14,8 +14,9 @@
 //= require jquery_ujs
 
 //= require bootstrap
-//= require bootstrap.min
 //= require bootstrap-editable
+
+//= require select2
 
 //= require_tree .
 

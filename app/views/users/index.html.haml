@@ -1,0 +1,27 @@
+= content_for :header do
+  Пользователи
+
+.col-xs-12
+  %button.btn.btn-primary.btn-sm{ 'data-toggle' => 'modal', 'data-target' => '#new_user', :type => 'button'}
+    Добавить пользователя
+
+.col-xs-12
+  %table.table.table-striped#users_list
+    %thead
+      %tr
+        %th П/н
+        %th Email
+        %th Роль
+        %th Действия
+    %tbody
+      - @users.each_with_index do |user, index|
+        = render partial: 'user_tr', :locals => {:user => user, :index => index}
+
+#new_user.modal.fade{:role => "dialog", :tabindex => "-1", "aria-hidden" => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"} &times;
+        %h4.modal-title Добавление нового пользователя
+      .modal-body
+        = render partial: 'users/form', :locals => {:user => User.new}

@@ -19,11 +19,17 @@
     -#    %a{:href => "#"} Messages
     %ul.nav.navbar-nav.navbar-right
       - if current_user && current_user.has_role?(:admin)
-        %li
-          %a{:href => "#"} Админ
+        %li.dropdown
+          %a.dropdown-toggle{"href" => "#", "data-toggle" => "dropdown"}
+            %span.glyphicon.glyphicon-user
+            Админ
+            %span.caret
+          %ul.dropdown-menu{'role' => "menu"}
+            %li
+              = link_to 'Пользователи', users_path
       %li
-        %a{:href => "#"}
-          %span.glyphicon.glyphicon-right-arrow
+        = link_to destroy_user_session_path, method: :delete do
+          %span.glyphicon.glyphicon-log-out
           Выход
 
 

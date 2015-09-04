@@ -1,0 +1,19 @@
+%tr{'data-id' => user.id}
+  %td=index+1
+  %td
+    %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'email', 'data-resource' => 'user', 'data-type' => 'text', 'data-pk' => "#{user.id}", 'data-url' => "#{user_path(user)}", 'data-emptytext' => 'укажите Email...' }
+      = user.email
+  %td
+    %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'roles', 'data-resource' => 'user', 'data-source' => @roles, 'data-type' => 'select', 'data-pk' => "#{user.id}", 'data-url' => "#{user_path(user)}", 'data-emptytext' => 'укажите роль...', 'data-value' => user.roles[0].id.to_s }
+      = user.roles[0].name
+  %td= button_to 'Удалить', user, :method => :delete, :remote => true, :data => { :confirm => 'Вы уверены, что хотите удалить пользователя?' }, :class => 'btn btn-danger btn-xs'
+
+:javascript
+
+  $(document).ready(function() {
+    $.fn.editable.defaults.mode = 'inline';
+    $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+
+    $('.edit_param').editable();
+
+  })

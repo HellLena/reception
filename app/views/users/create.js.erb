@@ -1,0 +1,6 @@
+<% if @user.errors.messages['pass'] %>
+    $("#error_message").html('<%= @user.errors.messages["pass"] %>');
+<% else %>
+    $('#new_user').modal('hide');
+    $('#users_list tbody').append('<%= escape_javascript( render partial: 'user_tr', :locals => { :user => @user, :index => User.all.count-1 } ) %>')
+<% end %>

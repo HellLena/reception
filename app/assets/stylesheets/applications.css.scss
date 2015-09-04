@@ -65,6 +65,23 @@ form .glyphicon_btn, .glyphicon_btn > .glyphicon {
   margin-bottom: 3px;
 }
 
+#error_message {
+  color: red;
+}
+
+#users_list {
+
+  .editable-input {
+    width: 80%!important;
+    display: inline-block;
+  }
+
+  .editable-buttons {
+    margin: 0 5px;
+  }
+
+}
+
 // -------------------- LOGIN FORM -----------------------------
 .form-signin
 {

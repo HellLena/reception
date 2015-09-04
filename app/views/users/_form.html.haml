@@ -1,0 +1,19 @@
+#error_message
+
+= form_for :user, :remote => true, :url => '/users/create' do |f|
+  - if user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(user.errors.count, "error")} prohibited this application from being saved:"
+      %ul
+        - user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.text_field :email, :class => 'form-control', :autofocus => "true", :placeholder => "Email", :required => "required", :type => "email"
+    = f.text_field :password, :class => 'form-control', :autocomplete => "off", :placeholder => "Пароль", :required => "required", :type => "password"
+    = f.text_field :password_confirmation, :class => 'form-control', :autocomplete => "off", :placeholder => "Подтверждение пароля", :required => "required", :type => "password"
+  .form-group
+    = select_tag "user[roles]", options_from_collection_for_select(Role.all, "id", "name"), :prompt => 'роль пользователя...', :required => true
+  .actions
+    = f.submit 'Сохранить', :class => 'btn btn-lg btn-primary btn-block', :type => "submit"
+

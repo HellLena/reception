@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :applications
+  resources :users
 
   post 'appeal_types/create' => 'appeal_types#create'
   put 'appeal_types/update/:id' => 'appeal_types#update'
 
   post 'decisions/create' => 'decisions#create'
   put 'decisions/update/:id' => 'decisions#update'
+
+  post 'users/create' => 'users#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

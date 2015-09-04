@@ -5,3 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+%w(жалоба предложение заявление).each{|type|
+  AppealType.create(:name => type)
+}
+
+%w(принять отказать перезвоню).each{|type|
+  Decision.create(:name => type)
+}
+
+[:admin, :secretary, :minister].each{|type|
+  Role.create(:name => type)
+}

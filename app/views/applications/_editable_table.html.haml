@@ -19,8 +19,10 @@
           %td
             %span.glyphicon.glyphicon-flag{:title => application.priority, :style => 'color:' + priority_colors[application.priority] + ';'}
           %td
-            %b= application.applicant + ": "
-            = application.subject[0..300] + "..."
+            %span.applicant
+              %b= application.applicant + ": "
+            %span.subject
+              = application.subject[0..300] + "..."
           %td
             %span.glyphicon.glyphicon-ok{:style => 'opacity:0.3;'}
           %td= button_to 'x', application, :method => :delete, :title => 'удалить', :data => { :confirm => 'Вы уверены, что хотите удалить запись?' }, :style => 'border: none; background: transparent;'
@@ -120,6 +122,18 @@
 
     $('span[data-name="decision"]').on('save', function() {
       $('.accordion-toggle[data-target="#' + $(this).data('pk') + '"] span.glyphicon.glyphicon-ok').css('color', 'green').css('opacity','1');
+    });
+
+    $('span[data-name="priority"]').on('save', function(e, params) {
+      $('.accordion-toggle[data-target="#' + $(this).data('pk') + '"] span.glyphicon.glyphicon-flag').css('color', {'низкий': 'green', 'средний': 'yellow', 'высокий': 'red'}[params.newValue]).css('title',params.newValue);
+    });
+
+    $('span[data-name="applicant"]').on('save', function(e, params) {
+      $('.accordion-toggle[data-target="#' + $(this).data('pk') + '"] span.applicant').html('<b>' + params.newValue + '<b/>');
+    });
+
+    $('span[data-name="subject"]').on('save', function(e, params) {
+      $('.accordion-toggle[data-target="#' + $(this).data('pk') + '"] span.subject').html(params.newValue.substring(0,300) + "...");
     });
   })
 

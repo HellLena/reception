@@ -21,6 +21,7 @@ class DecisionsController < ApplicationController
   def update
     respond_to do |format|
       if @decision.update(params[:name] => params[:value])
+        @decisions = Decision.all.map{|t| {'value' => t.id.to_s, 'text' => t.name} }.to_json
         format.js
       else
         format.js { render status: :unprocessable_entity }

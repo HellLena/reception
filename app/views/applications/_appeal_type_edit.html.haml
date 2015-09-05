@@ -1,5 +1,5 @@
 %li{'data-id' => "#{appeal_type.id}"}
-  %span{ class: 'edit_appeal_type', 'data-name' => 'name', 'data-resource' => 'appeal_type', 'data-type' => 'text', 'data-pk' => "#{appeal_type.id}", 'data-url' => '/appeal_types/update/' + appeal_type.id, 'data-emptytext' => 'укажите название для вида обращения...' }
+  %span{ title: 'редактировать', class: 'edit_appeal_type', 'data-name' => 'name', 'data-resource' => 'appeal_type', 'data-type' => 'text', 'data-pk' => "#{appeal_type.id}", 'data-url' => '/appeal_types/update/' + appeal_type.id, 'data-emptytext' => 'укажите название для вида обращения...' }
     = appeal_type.name
 
 :javascript

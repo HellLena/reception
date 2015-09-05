@@ -2,7 +2,7 @@
   Обращения граждан
 
 - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
-  .col-xs-12
+  .col-xs-12{:style => 'margin-bottom: 20px;'}
     = button_to 'Создать обращение', new_application_path, :class => 'btn btn-primary btn-sm', :method => :get
 
 .col-xs-2

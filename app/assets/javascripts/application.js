@@ -16,8 +16,6 @@
 //= require bootstrap
 //= require bootstrap-editable
 
-//= require select2
-
 //= require_tree .
 
 $(document).on('ready page:change', function() {

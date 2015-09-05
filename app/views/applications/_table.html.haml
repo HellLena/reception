@@ -18,7 +18,7 @@
           %td
             %b= application.applicant + ": "
             = application.subject[0..300] + "..."
-          %td= button_to 'x', application, :method => :delete, :data => { :confirm => 'Вы уверены, что хотите удалить запись?' }, :style => 'border: none; background: transparent;'
+          %td= button_to 'x', application, :method => :delete, :title => 'удалить', :data => { :confirm => 'Вы уверены, что хотите удалить запись?' }, :style => 'border: none; background: transparent;'
         %tr
           %td.hiddenRow{:colspan => "12"}
             %hr

@@ -21,6 +21,7 @@ class AppealTypesController < ApplicationController
   def update
     respond_to do |format|
       if @appeal_type.update(params[:name] => params[:value])
+        @appeal_types = AppealType.all.map{|t| {'value' => t.id.to_s, 'text' => t.name} }.to_json
         format.js
       else
         format.js { render status: :unprocessable_entity }

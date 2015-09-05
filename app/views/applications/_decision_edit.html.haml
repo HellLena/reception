@@ -1,5 +1,5 @@
 %li{'data-id' => "#{decision.id}"}
-  %span{ class: 'edit_decision_type', 'data-name' => 'name', 'data-resource' => 'decision', 'data-type' => 'text', 'data-pk' => "#{decision.id}", 'data-url' => '/decisions/update/' + decision.id, 'data-emptytext' => 'укажите название для типового решения...' }
+  %span{ title: 'редактировать', class: 'edit_decision_type', 'data-name' => 'name', 'data-resource' => 'decision', 'data-type' => 'text', 'data-pk' => "#{decision.id}", 'data-url' => '/decisions/update/' + decision.id, 'data-emptytext' => 'укажите название для типового решения...' }
     = decision.name
 
 :javascript

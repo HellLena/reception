@@ -6,6 +6,7 @@ class Application
   # field :minister, type: String
   field :applicant, type: String
   field :subject, type: String
+  field :priority, type: String
   field :contacts, type: String
   field :comments, type: String
   field :status, type: Boolean

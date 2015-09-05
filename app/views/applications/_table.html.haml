@@ -3,21 +3,26 @@
     %thead
       %tr
         %th &nbsp;
-        %th П/н
         %th.col-xs-2 Время создания
+        %th Приоритет
         %th.col-xs-8 Краткое описание
+        %th Обработано
         %th
     %tbody
+      - priority_colors = {'низкий' => 'green', 'средний' => 'yellow', 'высокий' => 'red'}
       - applications.each_with_index do |application, index|
         %tr.accordion-toggle{"data-target" => "#" + application.id, "data-toggle" => "collapse"}
           %td
             %button.btn.btn-default.btn-xs
               %span.glyphicon.glyphicon-eye-open
-          %td= index+1
           %td= application.created_at
+          %td
+            %span.glyphicon.glyphicon-flag{:style => 'color:' + priority_colors[application.priority] + ';'}
           %td
             %b= application.applicant + ": "
             = application.subject[0..300] + "..."
+          %td
+            %span.glyphicon.glyphicon-ok{:style => 'opacity:0.3;'}
           %td= button_to 'x', application, :method => :delete, :title => 'удалить', :data => { :confirm => 'Вы уверены, что хотите удалить запись?' }, :style => 'border: none; background: transparent;'
         %tr
           %td.hiddenRow{:colspan => "12"}
@@ -39,6 +44,10 @@
                   = application.appeal_type ? application.appeal_type.name : ""
               - else
                 = ': ' + (application.appeal_type ? application.appeal_type.name : "")
+              %br
+              %b Приоритет:
+              %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'priority', 'data-resource' => 'application', 'data-source' => [{:value => 'низкий', :text => 'низкий'}, {:value => 'средний', :text => 'средний'}, {:value => 'высокий', :text => 'высокий'}].to_json, 'data-type' => 'select', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите вид обращения...', 'data-value' => application.priority }
+                = application.priority
               %br
               %b Суть обращения:
               %br
@@ -95,17 +104,25 @@
     $('.edit_param').editable();
 
     $('.edit_status').editable({
-    type: 'checklist',
-    source: {'1': 'выполнено' },
-    mode: 'popup',
-    display: function(value, sourceData) {
-      if(value == 0 || (value instanceof Object && $.isEmptyObject(value))) {
-        $(this).html('<span class="glyphicon glyphicon-unchecked""></span>');
-      } else {
-        $(this).html('<span class="glyphicon glyphicon-check"></span>');
+      type: 'checklist',
+      source: {'1': 'выполнено' },
+      mode: 'popup',
+      display: function(value, sourceData) {
+        if(value == 0 || (value instanceof Object && $.isEmptyObject(value))) {
+          $(this).html('<span class="glyphicon glyphicon-unchecked""></span>');
+        } else {
+          $(this).html('<span class="glyphicon glyphicon-check"></span>');
+        }
       }
-    }
-  });
+    });
+
+    $('span[data-name="decision"]').on('save', function() {
+      $('.accordion-toggle[data-target="#' + $(this).data('pk') + '"] span.glyphicon.glyphicon-ok').css('color', 'green').css('opacity','1');
+    })
+
+    $('.edit_status').on('save', function() {
+      $('.accordion-toggle[data-target="#' + $(this).data('pk') + '"] span.glyphicon.glyphicon-ok').css('color', 'green').css('opacity','1');
+    })
   })
 
 

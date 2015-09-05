@@ -13,7 +13,7 @@
     %label
       Вид обращения
     = select_tag "application[appeal_type]", options_from_collection_for_select(@appeal_types, "id", "name"), :include_blank => true, :required => true
-    %button.btn.btn-primary.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#appeal_type', :title => 'Создать новый вид обращений', :type => 'button'}
+    %button.btn.btn-primary.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#appeal_type_modal', :title => 'Создать новый вид обращений', :type => 'button'}
       %span.glyphicon.glyphicon-plus
 
   .form-group

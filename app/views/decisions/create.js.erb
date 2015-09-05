@@ -1,4 +1,4 @@
 $('select[name="application[decision]"]').append('<option value="' + '<%= @decision.id %>' + '">' + '<%= @decision.name %>' + '</option>');
 $('#decisions_exist').append('<%= escape_javascript( render :partial => 'applications/decision_edit', :locals => { :decision => @decision } ) %>');
 $('span[data-name="decision"]').editable('option','source',jQuery.parseJSON('<%= raw @decisions %>'));
-
+$('select[name="decision"]').append('<option value="' + '<%= @decision.id %>' + '">' + '<%= @decision.name %>' + '</option>');

@@ -4,8 +4,25 @@ class ApplicationsController < ApplicationController
   # GET /applications
   # GET /applications.json
   def index
+    applications = Application.all
+    applications = applications.select{|app| app.appeal_type && app.appeal_type.id.to_s == params[:appeal_type] } unless params[:appeal_type].blank?
+    applications = applications.select{|app| app.decision && app.decision.id.to_s == params[:decision] } unless params[:decision].blank?
+    applications = applications.select{|app| app.priority == params[:priority] } unless params[:priority].blank?
+    applications = applications.select{|app|
+      date = app.created_at.day.to_s.rjust(2, '00') + "." + app.created_at.month.to_s.rjust(2, '00') + "." + app.created_at.year.to_s
+      date >= params[:start]
+    } unless params[:start].blank?
+    applications = applications.select{|app|
+      date = app.created_at.day.to_s.rjust(2, '00') + "." + app.created_at.month.to_s.rjust(2, '00') + "." + app.created_at.year.to_s
+      date <= params[:end]
+    } unless params[:end].blank?
+    unless params[:q].blank?
+      query = Regexp.new(".*"+params["q"]+".*")
+      applications = applications.select{|app| app.applicant.match(query) || app.subject.match(query) || app.contacts.match(query) }
+    end
+
     @applications = {:new => [], :current => [], :finished => []}
-    Application.all.each{|application|
+    applications.each{|application|
       if application.status
         @applications[:finished].push(application)
       elsif application.decision

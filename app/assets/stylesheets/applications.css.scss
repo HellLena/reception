@@ -183,3 +183,22 @@ form .glyphicon_btn, .glyphicon_btn > .glyphicon {
   display: block;
   margin-top: 10px;
 }
+
+// ------------------- SEARCH FORM ---------------------
+.search {
+  .form-control {
+    height: 35px!important;
+    font-size: 1.1em;
+    padding: 0 10px;
+  }
+  .input-group-addon {
+    font-weight: bold;
+    font-size: 1.0em;
+  }
+  .input-group {
+    margin-bottom: 10px;
+  }
+  .input-daterange input {
+    width: 100px!important;
+  }
+}

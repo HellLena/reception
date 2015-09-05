@@ -1,28 +1,14 @@
 = content_for :header do
   Обращения граждан
 
-- if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
-  .col-xs-12{:style => 'margin-bottom: 20px;'}
+.col-xs-12.col-md-2
+  - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
     = button_to 'Создать обращение', new_application_path, :class => 'btn btn-primary btn-sm', :method => :get
+.col-xs-12.col-md-10
+  = render :partial => 'search'
 
-.col-xs-2
-  %ul.nav.nav-tabs.tabs-left
-    %li.active
-      %a{:href => "#a", "data-toggle" => "tab"}
-        = "Новые (" + @applications[:new].length.to_s + ")"
-    %li
-      %a{:href => "#b", "data-toggle" => "tab"}
-        = "В работе (" + @applications[:current].length.to_s + ")"
-    %li
-      %a{:href => "#c", "data-toggle" => "tab"}
-        = "Выполненные (" + @applications[:finished].length.to_s + ")"
-.col-xs-10
-  .tab-content
-    .tab-pane.active#a
-      = render :partial => 'table', :locals => { :applications => @applications[:new] }
-    .tab-pane#b
-      = render :partial => 'table', :locals => { :applications => @applications[:current] }
-    .tab-pane#c
-      = render :partial => 'table', :locals => { :applications => @applications[:finished] }
+#search_results
+  = render :partial => 'search_results', :locals => { applications: @applications }
+
 
 

@@ -1,0 +1,126 @@
+- if applications.length > 0
+  %table.table.table-condensed.col-xs-12.edit_applications
+    %thead
+      %tr
+        %th &nbsp;
+        %th.col-xs-2 Время создания
+        %th Приоритет
+        %th.col-xs-8 Краткое описание
+        %th Обработано
+        %th
+    %tbody
+      - priority_colors = {'низкий' => 'green', 'средний' => 'yellow', 'высокий' => 'red'}
+      - applications.each_with_index do |application, index|
+        %tr.accordion-toggle{"data-target" => "#" + application.id, "data-toggle" => "collapse"}
+          %td
+            %button.btn.btn-default.btn-xs
+              %span.glyphicon.glyphicon-eye-open
+          %td= application.created_at
+          %td
+            %span.glyphicon.glyphicon-flag{:title => application.priority, :style => 'color:' + priority_colors[application.priority] + ';'}
+          %td
+            %b= application.applicant + ": "
+            = application.subject[0..300] + "..."
+          %td
+            %span.glyphicon.glyphicon-ok{:style => 'opacity:0.3;'}
+          %td= button_to 'x', application, :method => :delete, :title => 'удалить', :data => { :confirm => 'Вы уверены, что хотите удалить запись?' }, :style => 'border: none; background: transparent;'
+        %tr
+          %td.hiddenRow{:colspan => "12"}
+            %hr
+            .accordion-body.collapse{:id => application.id}
+              %b ФИО:
+              - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'applicant', 'data-resource' => 'application', 'data-type' => 'text', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите ФИО...' }
+                  = application.applicant
+              - else
+                = application.applicant
+              %br
+              %b Вид обращения
+              - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+                %button.btn.btn-default.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#appeal_type_modal', :title => 'Создать новый вид обращений', :type => 'button'}
+                  %span.glyphicon.glyphicon-plus
+                = ': '
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'appeal_type', 'data-resource' => 'application', 'data-source' => @appeal_types, 'data-type' => 'select', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите вид обращения...', 'data-value' => application.appeal_type ? application.appeal_type.id.to_s : "" }
+                  = application.appeal_type ? application.appeal_type.name : ""
+              - else
+                = ': ' + (application.appeal_type ? application.appeal_type.name : "")
+              %br
+              %b Приоритет:
+              %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'priority', 'data-resource' => 'application', 'data-source' => [{:value => 'низкий', :text => 'низкий'}, {:value => 'средний', :text => 'средний'}, {:value => 'высокий', :text => 'высокий'}].to_json, 'data-type' => 'select', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите вид обращения...', 'data-value' => application.priority }
+                = application.priority
+              %br
+              %b Суть обращения:
+              %br
+              - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'subject', 'data-resource' => 'application', 'data-type' => 'textarea', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите суть обращения...' }
+                  = application.subject
+              - else
+                = application.subject
+              %br
+              %b Контакты для обратной связи:
+              %br
+              - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'contacts', 'data-resource' => 'application', 'data-type' => 'textarea', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите контакты для обратной связи...' }
+                  = application.contacts
+              - else
+                = application.contacts
+              %br
+              %b Решение
+              - if current_user.has_role?(:minister) || current_user.has_role?(:admin)
+                %button.btn.btn-default.btn-xs{:class => 'glyphicon_btn', 'data-toggle' => 'modal', 'data-target' => '#decision_modal', :title => 'Создать типовое решение', :type => 'button'}
+                  %span.glyphicon.glyphicon-plus
+                = ': '
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'decision', 'data-resource' => 'application', 'data-source' => @decisions, 'data-type' => 'select', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'примите решение...', 'data-value' => application.decision ? application.decision.id.to_s : "" }
+                  = application.decision ? application.decision.name : ""
+              - else
+                = ': ' + (application.decision ? application.decision.name : "")
+              %br
+              %b Комментарий:
+              - if current_user.has_role?(:minister) || current_user.has_role?(:admin)
+                %span{ title: 'редактировать', class: 'edit_param', 'data-name' => 'comments', 'data-resource' => 'application', 'data-type' => 'textarea', 'data-pk' => "#{application.id}", 'data-url' => "#{application_path(application)}", 'data-emptytext' => 'укажите комментарий...' }
+                  = application.comments
+              - else
+                = application.comments
+              %br
+              %b Выполнено:
+              - if current_user.has_role?(:secretary) || current_user.has_role?(:admin)
+                %span.edit_status{ 'data-name' => 'status', 'data-url' => "#{application_path(application)}", 'data-pk' => "#{application.id}", 'data-resource' => 'application', 'data-value' => application.status ? 1 : 0 }
+              - else
+                - if application.status
+                  %span.glyphicon.glyphicon-check
+                - else
+                  %span.glyphicon.glyphicon-unchecked
+            %hr
+
+= render partial: 'appeal_type_modal', :locals => {:appeal_type => AppealType.new, :appeal_types => AppealType.all}
+= render partial: 'decision_modal', :locals => {:decision => Decision.new, :decisions => Decision.all}
+
+:javascript
+
+  $(document).ready(function() {
+    $.fn.editable.defaults.mode = 'inline';
+    $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+
+    $('.edit_param').editable();
+
+    $('.edit_status').editable({
+      type: 'checklist',
+      source: {'1': 'выполнено' },
+      mode: 'popup',
+      display: function(value, sourceData) {
+        if(value == 0 || (value instanceof Object && $.isEmptyObject(value))) {
+          $(this).html('<span class="glyphicon glyphicon-unchecked""></span>');
+        } else {
+          $(this).html('<span class="glyphicon glyphicon-check"></span>');
+        }
+      }
+    }).on('save', function() {
+      $('.accordion-toggle[data-target="#' + $(this).data('pk') + '"] span.glyphicon.glyphicon-ok').css('color', 'green').css('opacity','1');
+    });
+
+    $('span[data-name="decision"]').on('save', function() {
+      $('.accordion-toggle[data-target="#' + $(this).data('pk') + '"] span.glyphicon.glyphicon-ok').css('color', 'green').css('opacity','1');
+    });
+  })
+
+

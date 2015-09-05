@@ -15,6 +15,7 @@
 
 //= require bootstrap
 //= require bootstrap-editable
+//= require bootstrap-datepicker.ru.js
 
 //= require_tree .
 

@@ -1,2 +1,3 @@
-$('select[name="application[decision]"]').append('<option value="' + '<%= @decision.id %>' + '">' + '<%= @decision.name %>' + '</option>');
+$('select[name="application[decision]"] option[value="' + '<%= @decision.id %>' + '"]').text('<%= @decision.name %>');
 $('span[data-name="decision"]').editable('option','source',jQuery.parseJSON('<%= raw @decisions %>'));
+$('select[name="decision"] option[value="' + '<%= @decision.id %>' + '"]').text('<%= @decision.name %>');

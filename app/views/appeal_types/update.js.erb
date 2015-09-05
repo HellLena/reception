@@ -1,3 +1,3 @@
-$('select[name="application[appeal_type]"]').append('<option value="' + '<%= @appeal_type.id %>' + '">' + '<%= @appeal_type.name %>' + '</option>');
+$('select[name="application[appeal_type]"] option[value="' + '<%= @appeal_type.id %>' + '"]').text('<%= @appeal_type.name %>');
 $('span[data-name="appeal_type"]').editable('option','source',jQuery.parseJSON('<%= raw @appeal_types %>'));
-
+$('select[name="appeal_type"] option[value="' + '<%= @appeal_type.id %>' + '"]').text('<%= @appeal_type.name %>');

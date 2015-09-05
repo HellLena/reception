@@ -1,0 +1,39 @@
+= form_tag applications_path, :method => :get, :remote => true, :class => 'form-horizontal search' do |f|
+
+  .control-group
+    .controls.form-inline
+      .input-group
+        %span.input-group-addon
+          Вид обращения
+        = select_tag :appeal_type, options_from_collection_for_select(AppealType.all,"id","name"), :class => 'form-control', :include_blank => true
+      .input-group
+        %span.input-group-addon
+          Решение
+        = select_tag :decision, options_from_collection_for_select(Decision.all,"id","name"), :class => 'form-control', :include_blank => true
+      .input-group
+        %span.input-group-addon
+          Приоритет
+        = select_tag :priority, options_for_select(["высокий", "средний", "низкий"]), :class => 'form-control', :include_blank => true
+      .input-daterange.input-group.col-xs-12.col-md-4
+        %span.input-group-addon Период: c
+        %input.form-control{:name => "start", :type => "text"}
+          %span.input-group-addon по
+          %input.form-control{:name => "end", :type => "text"}
+      .input-group.col-xs-12.col-md-6
+        = text_field_tag :q, '', :class => 'form-control', :placeholder => "Поиск по ключевым словам в полях: ФИО, Суть обращения, Контакты"
+      .input-group
+        = button_tag(type: 'submit', :class => 'btn btn-primary btn-sm', :id => 'search_btn') do
+          Поиск
+          %span.glyphicon.glyphicon-search
+
+:javascript
+
+  $(document).ready(function(){
+    $('.input-daterange input').datepicker({
+      format: 'dd.mm.yyyy',
+      todayHighlight: true,
+      language: 'ru',
+      endDate: '0d',
+      autoclose: true
+    })
+  })

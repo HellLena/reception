@@ -94,9 +94,6 @@
                   %span.glyphicon.glyphicon-unchecked
             %hr
 
-= render partial: 'appeal_type_modal', :locals => {:appeal_type => AppealType.new, :appeal_types => AppealType.all}
-= render partial: 'decision_modal', :locals => {:decision => Decision.new, :decisions => Decision.all}
-
 :javascript
 
   $(document).ready(function() {

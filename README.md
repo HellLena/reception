@@ -5,17 +5,17 @@ Ruby v.2.0.0, Rails v.4.1.1, MongoDB v.4.0.1
 ### Развёртывание приложения ###
 
 1. Клонирование проекта
-```
-git clone https://github.com/HellLena/reception.git
-```
+   ```
+   git clone https://github.com/HellLena/reception.git
+   ```
 2. Установка необходимых пакетов gem
-```
-bundle install
-```
+   ```
+   bundle install
+   ```
 3. Заполнение базы данных тестовыми данными
-```
-rake db:seed
-```
+   ```
+   rake db:seed
+   ```
 
 ### Описание работы приложения ###
 

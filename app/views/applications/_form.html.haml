@@ -19,7 +19,7 @@
   .form-group
     %label
       Приоритет
-    = select_tag "application[priority]", "<option selected='selected'>низкий</option><option><span class='glyphicon glyphicon-stop' style='color:yellow;'></span> средний</option><option><span class='glyphicon glyphicon-stop' style='color:red;'></span> высокий</option>".html_safe, :required => true
+    = select_tag "application[priority]", "<option selected='selected' value='низкий'>низкий</option><option value='средний'><span class='glyphicon glyphicon-stop' style='color:yellow;'></span> средний</option><option value='высокий'><span class='glyphicon glyphicon-stop' style='color:red;'></span> высокий</option>".html_safe, :required => true
 
   .form-group
     = f.text_area :subject, :label => "Суть обращения", :required => true

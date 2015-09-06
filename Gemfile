@@ -27,6 +27,7 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
+gem 'devise-i18n'
 gem 'cancan'
 
 # Use unicorn as the app server
